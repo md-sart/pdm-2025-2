@@ -1,0 +1,17 @@
+export const PEOPLE_LIST = [
+  "Devin",
+  "Dan",
+  "Dominic",
+  "Jackson",
+  "James",
+  "Jillian",
+  "Jimmy",
+  "Joel",
+  "John",
+  "Julie",
+  "Marcus",
+  "Mary",
+  "Michael",
+  "Mike",
+  "Monica",
+];

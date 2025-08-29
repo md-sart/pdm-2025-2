@@ -2,14 +2,16 @@ import { useState } from "react";
 import { StyleSheet, Switch, Text, View } from "react-native";
 
 import { PizzaTranslator } from "@/components/PizzaTranslator";
-import { ScrollViewApp } from "@/components/ScrollViewApp";
+// import { ScrollViewApp } from "@/components/ScrollViewApp";
+// import { FlatListExample } from "@/components/FlatListExample";
+import { SectionListExample } from "@/components/SectionListExample";
 
 export default function Index() {
   let MyComponent;
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   if (isEnabled) {
-    MyComponent = <ScrollViewApp />;
+    MyComponent = <SectionListExample />;
   } else {
     MyComponent = (
       <View
