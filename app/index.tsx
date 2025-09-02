@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import { useState } from "react";
 import { Dimensions, StyleSheet, Switch, Text, View } from "react-native";
 
@@ -25,6 +26,8 @@ export default function Index() {
         }}
       >
         <Text style={styles.title}>Olá Turma!</Text>
+        <Link href="/list">Section List Example</Link>
+        <Link href="/tarefas">Tasks Example</Link>
         <PizzaTranslator />
       </View>
     );

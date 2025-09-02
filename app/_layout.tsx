@@ -1,5 +1,21 @@
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  return <Stack />;
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "olive",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    >
+      <Stack.Screen name="index" />
+      <Stack.Screen name="list" />
+      <Stack.Screen name="tarefas" />
+    </Stack>
+  );
 }
