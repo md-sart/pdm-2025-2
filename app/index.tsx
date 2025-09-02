@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { StyleSheet, Switch, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Switch, Text, View } from "react-native";
 
 import { PizzaTranslator } from "@/components/PizzaTranslator";
 // import { ScrollViewApp } from "@/components/ScrollViewApp";
 // import { FlatListExample } from "@/components/FlatListExample";
 import { SectionListExample } from "@/components/SectionListExample";
+
+console.log("window dimensions: ", Dimensions.get("window"));
 
 export default function Index() {
   let MyComponent;
