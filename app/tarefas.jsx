@@ -1,41 +1,69 @@
-import { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { getTarefas, updateTarefa } from "@/api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import { CardTarefa } from "../components/CardTarefa";
 
 export default function TelaTarefas() {
-  const [tarefas, setTarefas] = useState([]);
+  const queryClient = useQueryClient();
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: ["tarefas"],
+    queryFn: getTarefas,
+  });
 
-  useEffect(() => {
-    const fetchTarefas = async () => {
-      try {
-        const response = await fetch(
-          "https://parseapi.back4app.com/classes/Tarefa",
-          {
-            headers: {
-              "X-Parse-Application-Id":
-                "lzQ61WWmjSxYma4dOZSVhO5Ofo9HQ0WaXT1bTRyY",
-              "X-Parse-JavaScript-Key":
-                "VzOBLroXdlFsuyozWeDEVGHSB4PGNJkpTbXUeSWk",
-            },
-          }
-        );
-        const data = await response.json();
-        setTarefas(data.results);
-        console.log("data", data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchTarefas();
-  }, []);
+  const updateMutation = useMutation({
+    mutationFn: updateTarefa,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tarefas"] });
+    },
+  });
 
+  function handleToggle(tarefa) {
+    console.log("toggle executado", tarefa);
+    updateMutation.mutate({
+      ...tarefa,
+      concluida: !tarefa.concluida,
+    });
+  }
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Tela de Tarefas</Text>
       <FlatList
-        data={tarefas}
+        style={{ width: "100%" }}
+        contentContainerStyle={styles.list}
+        data={data}
         keyExtractor={(item) => item.objectId}
-        renderItem={({ item }) => <Text>{item.descricao}</Text>}
+        renderItem={({ item }) => (
+          <CardTarefa tarefa={item} onToggle={handleToggle} />
+        )}
       />
+      {(isPending || error || isFetching) && (
+        <View style={styles.statusbar}>
+          {isPending && <Text>Carregando...</Text>}
+          {error && <Text>Erro: {error.message}</Text>}
+          {isFetching && <Text>Atualizando...</Text>}
+        </View>
+      )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+  },
+  statusbar: {
+    backgroundColor: "yellow",
+    width: "100%",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  list: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+  },
+});
