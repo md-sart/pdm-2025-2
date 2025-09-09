@@ -3,6 +3,13 @@ import { Button, StyleSheet, Switch, Text, View } from "react-native";
 
 export function CardTarefa({ tarefa, onToggle, onPress }) {
   const [disabled, setDisabled] = useState(false);
+  const handlePress = () => {
+    setDisabled(true);
+    setTimeout(() => {
+      setDisabled(false);
+    }, 5000);
+    onPress(tarefa);
+  };
   return (
     <View style={styles.card}>
       <View style={styles.descricaoContainer}>
@@ -20,13 +27,7 @@ export function CardTarefa({ tarefa, onToggle, onPress }) {
         <Button
           disabled={disabled}
           color="indianred"
-          onPress={() => {
-            setDisabled(true);
-            setTimeout(() => {
-              setDisabled(false);
-            }, 5000);
-            onPress(tarefa);
-          }}
+          onPress={handlePress}
           title="X"
         />
       </View>
