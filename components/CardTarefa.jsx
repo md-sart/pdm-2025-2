@@ -1,26 +1,43 @@
-import { StyleSheet, Switch, Text, View } from "react-native";
+import { useState } from "react";
+import { Button, StyleSheet, Switch, Text, View } from "react-native";
 
-export function CardTarefa({ tarefa, onToggle }) {
+export function CardTarefa({ tarefa, onToggle, onPress }) {
+  const [disabled, setDisabled] = useState(false);
   return (
     <View style={styles.card}>
-      <Text>{tarefa.descricao}</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={tarefa.concluida ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        value={tarefa.concluida}
-        onValueChange={() => onToggle(tarefa)}
-      />
+      <View style={styles.descricaoContainer}>
+        <Text>{tarefa.descricao}</Text>
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={tarefa.concluida ? "#f5dd4b" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          value={tarefa.concluida}
+          onValueChange={() => onToggle(tarefa)}
+        />
+      </View>
+      <View style={styles.descricaoContainer}>
+        <View style={{ flex: 1 }} />
+        <Button
+          disabled={disabled}
+          color="indianred"
+          onPress={() => {
+            setDisabled(true);
+            setTimeout(() => {
+              setDisabled(false);
+            }, 5000);
+            onPress(tarefa);
+          }}
+          title="X"
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    alignItems: "center",
+    width: "100%",
     backgroundColor: "white",
-    flexDirection: "row",
-    justifyContent: "space-between",
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -30,9 +47,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    width: "90%",
     height: 100,
     padding: 5,
     margin: 5,
+  },
+  descricaoContainer: {
+    width: "90%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });

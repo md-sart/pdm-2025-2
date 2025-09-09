@@ -26,3 +26,17 @@ export async function updateTarefa(tarefa) {
   );
   return data;
 }
+
+export async function addTarefa({ descricao }) {
+  const { data } = await instance.post(
+    `/classes/Tarefa`,
+    { descricao },
+    { headers: headerJson }
+  );
+  return data;
+}
+
+export async function deleteTarefa(tarefa) {
+  const { data } = await instance.delete(`/classes/Tarefa/${tarefa.objectId}`);
+  return data;
+}
