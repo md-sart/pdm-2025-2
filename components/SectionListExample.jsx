@@ -2,6 +2,7 @@ import { SectionList, StyleSheet, Text, View } from "react-native";
 
 import { PEOPLE_LIST as DATA } from "@/data";
 import { transformListToSectionList } from "@/utils";
+import { useStore } from "@/zustand";
 
 const styles = StyleSheet.create({
   container: {
@@ -28,8 +29,13 @@ const styles = StyleSheet.create({
 const TRANSFORMED_DATA = transformListToSectionList(DATA);
 
 export const SectionListExample = () => {
+  const isEnabled = useStore((state) => state.isEnabled);
+
   return (
     <View style={styles.container}>
+      <Text style={{ marginBottom: 10, fontSize: 20 }}>
+        {isEnabled ? "Enabled" : "Disabled"}
+      </Text>
       <SectionList
         sections={TRANSFORMED_DATA}
         renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
