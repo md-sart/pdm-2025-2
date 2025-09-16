@@ -26,7 +26,7 @@ export default function Index() {
           marginTop: 25,
         }}
       >
-        <Text style={styles.title}>Olá Turma!</Text>
+        <Text style={styles.title}>Olá Turma!!!</Text>
         <Link href="/list">Section List Example</Link>
         <Link href="/tarefas">Tasks Example</Link>
         <PizzaTranslator />
