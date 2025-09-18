@@ -10,31 +10,11 @@ import { useStore } from "@/zustand";
 console.log("window dimensions: ", Dimensions.get("window"));
 
 export default function Index() {
-  let MyComponent;
   const isEnabled = useStore((state) => state.isEnabled);
   const toggleIsEnabled = useStore((state) => state.toggleIsEnabled);
 
-  if (isEnabled) {
-    MyComponent = <SectionListExample />;
-  } else {
-    MyComponent = (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "flex-start",
-          alignItems: "center",
-          marginTop: 25,
-        }}
-      >
-        <Text style={styles.title}>Olá Turma!!!</Text>
-        <Link href="/list">Section List Example</Link>
-        <Link href="/tarefas">Tasks Example</Link>
-        <PizzaTranslator />
-      </View>
-    );
-  }
   return (
-    <View style={{ flex: 1, alignItems: "center" }}>
+    <View style={styles.rootContainer}>
       <Switch
         trackColor={{ false: "#767577", true: "#81b0ff" }}
         thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
@@ -42,12 +22,31 @@ export default function Index() {
         onValueChange={toggleIsEnabled}
         value={isEnabled}
       />
-      {MyComponent}
+      {isEnabled ? (
+        <SectionListExample />
+      ) : (
+        <View style={styles.container}>
+          <Text style={styles.title}>Olá Turma!!!</Text>
+          <Link href="/list">Section List Example</Link>
+          <Link href="/tarefas">Tasks Example</Link>
+          <PizzaTranslator />
+        </View>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    alignItems: "center",
+  },
+  container: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginTop: 25,
+  },
   title: {
     fontSize: 32,
     fontWeight: "bold",
