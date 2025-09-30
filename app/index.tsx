@@ -1,5 +1,13 @@
+import { Spinner } from "@/components/ui/spinner";
+import { Switch } from "@/components/ui/switch";
 import { Link } from "expo-router";
-import { Dimensions, StyleSheet, Switch, Text, View } from "react-native";
+import {
+  Dimensions,
+  Switch as RNSwitch,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import { PizzaTranslator } from "@/components/PizzaTranslator";
 // import { ScrollViewApp } from "@/components/ScrollViewApp";
@@ -15,7 +23,7 @@ export default function Index() {
 
   return (
     <View style={styles.rootContainer}>
-      <Switch
+      <RNSwitch
         trackColor={{ false: "#767577", true: "#81b0ff" }}
         thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
         ios_backgroundColor="#3e3e3e"
@@ -27,6 +35,15 @@ export default function Index() {
           Welcome to Nativewind!
         </Text>
       </View>
+      <Spinner size="large" color="orange" />
+      <Switch
+        size="md"
+        isDisabled={false}
+        trackColor={{ false: "#d4d4d4", true: "#525252" }}
+        thumbColor="#fafafa"
+        activeThumbColor="#fafafa"
+        ios_backgroundColor="#d4d4d4"
+      />
       {isEnabled ? (
         <SectionListExample />
       ) : (
