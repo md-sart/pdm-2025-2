@@ -44,15 +44,16 @@
     },
     "extra": {
       "eas": {
-        "projectId": ""
-      }
+        "projectId": "db15c066-394e-448a-8187-395084c16c82"
+      },
+      "router": {}
     },
-    "owner": "marciobueno1",
-    "updates": {
-      "url": "https://u.expo.dev/35aae221-2f3c-4cba-a266-939001718d54"
-    },
+    "owner": "md-sart",
     "runtimeVersion": {
       "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/db15c066-394e-448a-8187-395084c16c82"
     }
   }
 }
