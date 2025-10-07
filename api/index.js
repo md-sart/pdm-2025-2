@@ -5,7 +5,7 @@ const headerJson = {
 };
 
 const instance = axios.create({
-  baseURL: "https://parseapi.back4app.com",
+  baseURL: "aos-postgree-express-awijmuxv4-marias-projects-ed92f867.vercel.app",
   timeout: 1000,
   headers: {
     "X-Parse-Application-Id": "lzQ61WWmjSxYma4dOZSVhO5Ofo9HQ0WaXT1bTRyY",
